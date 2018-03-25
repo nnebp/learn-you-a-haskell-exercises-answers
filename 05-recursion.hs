@@ -10,8 +10,13 @@ power x y = x * power x (y - 1)
 -- 	     fib 1 = [1, 0]
 --	     fib 10 = [55,34,21,13,8,5,3,2,1,1,0]	
 -- try to use a where clause
-fib :: (Num a, Eq a) => a -> [a]
-fib x = 
+fib :: (Num a, Eq a, Enum a) => a -> [a]
+fib x = reverse [fibnum y | y <- [0 .. x]]
+	where fibnum n
+		| n == 0    = 0 
+		| n == 1    = 1 
+		| otherwise = fibnum (n - 1) + fibnum (n - 2)
+
 
 -- This is not recursive, but have a go anyway.
 -- Create a function which takes two parameters, a number and a step
@@ -20,7 +25,8 @@ fib x =
 --			    stepReverseSign -3 1 = 4
 --			    stepReverseSign 1 2 = -3
 stepReverseSign :: (Fractional a, Ord a) => a -> a -> a
-stepReverseSign a = undefined
+--stepReverseSign a = (+((-1) * a))
+-- should swicth it for positive num
 
 {- Lets calculate pi.
  - The Leibniz formula for pi (http://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80)
