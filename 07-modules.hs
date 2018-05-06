@@ -5,7 +5,7 @@
 -- Example areaConv inchesToCentimetres 9 = 58.0644
 
 areaConv :: (Float -> Float) -> Float -> Float
-areaConv linearConversion area = undefined
+areaConv linearConversion area = linearConversion area 
 
 -- define a function for converting square inches into square centimetres
 sqInToSqCm :: Float -> Float
