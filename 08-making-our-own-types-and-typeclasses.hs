@@ -14,15 +14,29 @@
 
 data Suit = Diamonds | Hearts | Spades | Clubs deriving (Show, Enum)
 data Digit = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | 
-	Jack | Queen | King | Ace deriving (Show)
---TODO this cant be the best way to do this
+	Jack | Queen | King | Ace deriving (Show, Eq, Ord, Enum)
+data Card = Card Suit Digit deriving (Show)
+
+{- another way to do it
 data Card = Card { suit :: Suit
 				 , digit :: Digit
 				 } deriving (Show)
+-}
 
 -- We should be able to provide a function which returns the higher ranked card:
+
 betterCard :: Card -> Card -> Card
-betterCard x y = if (x.suit
+betterCard (Card xSuit xDigit) (Card ySuit yDIgit) 
+	| xSuit > ySuit = (Card xSuit xDigit)
+	| xSuit < ySuit = (Card ySUit yDigit)
+-- not sure what do to if they are equal
+
+{-
+betterCard :: Card -> Card -> Card
+betterCard x y
+	| digit x > digit y = x
+	| otherwise         = y
+-}
 
 -- Here is a new Typeclass, which represents some kind of playing hand in a game.
 -- It returns True for a "winning hand", depending on the rules for the type of class we are playing with
